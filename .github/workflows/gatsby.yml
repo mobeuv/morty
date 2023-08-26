@@ -78,6 +78,8 @@ jobs:
       - name: Build with Gatsby
         env:
           PREFIX_PATHS: "true"
+          DATOCMS_API_TOKEN: ${{ secrets.DATOCMS_API_TOKEN }}
+          DATOCMS_ENVIRONMENT: ${{ secrets.DATOCMS_ENVIRONMENT }}
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
@@ -92,11 +94,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: create env file
-        run: |
-          touch .env
-          echo DATOCMS_API_TOKEN=${{ secrets.DATOCMS_API_TOKEN }} >> .env
-          echo DATOCMS_ENVIRONMENT=${{ secrets.DATOCMS_ENVIRONMENT }} >> .env
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
