@@ -2,12 +2,11 @@ import * as React from "react"
 
 export default function GatsbyDatoLogo() {
   return (
-  <svg
+    <svg
     xmlns="http://www.w3.org/2000/svg"
     width={240}
     height={113}
     fill="none"
-    {...props}
   >
     <path
       fill="#fff"
