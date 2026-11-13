@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+/* ============================================================
+   MOBEUV — Design tokens
+   ============================================================ */
+
+@theme {
+  /* ————— Paleta ————— */
+  /* Azul-marinho profundo */
+  --color-navy-950: #0a1928;
+  --color-navy-900: #10243a;
+  --color-navy-800: #16304c;
+  --color-navy-700: #1e3e63;
+
+  /* Azul tecnológico (marca) */
+  --color-brand-700: #1254b4;
+  --color-brand-600: #1769e0;
+  --color-brand-500: #2f7be9;
+  --color-brand-400: #5c97ee;
+  --color-brand-100: #e1edfd;
+  --color-brand-50: #f0f6fe;
+
+  /* Azul claro (acento) */
+  --color-accent-500: #2ca6d9;
+  --color-accent-400: #48b8e8;
+  --color-accent-300: #74cbf0;
+  --color-accent-200: #a6def6;
+  --color-accent-100: #d9f0fb;
+
+  /* Neutros */
+  --color-mist: #f3f5f7;
+  --color-mist-2: #e9edf2;
+  --color-graphite: #202a35;
+  --color-muted: #55627a;
+  --color-faint: #8a94a6;
+
+  /* ————— Tipografia ————— */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, "SF Mono", monospace;
+
+  /* ————— Motion ————— */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ————— Keyframes ————— */
+  --animate-fade-up: fade-up 0.9s var(--ease-out-expo) both;
+  --animate-fade-in: fade-in 1.2s var(--ease-out-expo) both;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-float-slow: float 12s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 4s ease-in-out infinite;
+  --animate-draw: draw 2.4s var(--ease-out-expo) both;
+  --animate-drift: drift 1.6s linear infinite;
+  --animate-orbit: orbit 30s linear infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+  }
+
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes drift {
+    from {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-18px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: var(--color-graphite);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-600);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/* ============================================================
+   Utilities / componentes recorrentes
+   ============================================================ */
+
+@layer components {
+  /* Container com largura máxima e respiro lateral */
+  .container-x {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 76rem; /* 1216px */
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .container-x {
+      padding-inline: 1.75rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-x {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Kicker / etiqueta editorial */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+}
+
+/* ============================================================
+   Reveal on scroll
+   Os elementos com [data-reveal] começam ocultos e, quando entram
+   no viewport, recebem a classe .is-revealed (controlado por JS).
+   ============================================================ */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Acessibilidade: reduzir movimento
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
