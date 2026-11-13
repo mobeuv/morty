@@ -55,7 +55,7 @@ se constrói e no que se deixa para quem vem depois.
 
 ## Contato
 
-- **Site:** <https://mobeuv.github.io/morty>
+- **Site:** <https://mobeuv.com>
 - **E-mail institucional:** app@mobeuv.com
 - **Seções:** Início, Sobre nós, O que fazemos, Nossa visão, Contato.
 

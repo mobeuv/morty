@@ -15,7 +15,7 @@ export const site = {
    * URL pública completa do site (usada em SEO / Open Graph).
    * Em domínio próprio, use a raiz (ex.: "https://mobeuv.com").
    */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mobeuv.github.io/morty",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mobeuv.com",
   /**
    * E-mail institucional. Usado no formulário de contato (fallback via
    * mailto:) e na seção de contato. Sobrescreva via NEXT_PUBLIC_CONTACT_EMAIL.

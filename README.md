@@ -44,7 +44,7 @@ Copie `.env.example` para `.env.local` e ajuste os valores:
 
 | Variável                     | Descrição                                                                 |
 | ---------------------------- | ------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_BASE_PATH`      | Subdiretório do site. `/morty` no GitHub Pages; vazio em domínio próprio.  |
+| `NEXT_PUBLIC_BASE_PATH`      | Subdiretório do site. Vazio no domínio próprio (`mobeuv.com`); use `/morty` se publicar em `<owner>.github.io/<repo>`. |
 | `NEXT_PUBLIC_SITE_URL`       | URL pública completa (SEO / Open Graph / canonical).                       |
 | `NEXT_PUBLIC_CONTACT_EMAIL`  | E-mail usado no formulário e na seção de contato.                          |
 
@@ -56,16 +56,21 @@ Copie `.env.example` para `.env.local` e ajuste os valores:
 
 ## Deploy no GitHub Pages
 
-1. No repositório, acesse **Settings → Pages** e defina a fonte como
-   **GitHub Actions**.
+O site é publicado no domínio próprio **`https://mobeuv.com`** (na raiz, sem
+subdiretório). O workflow já faz o build com `basePath` vazio e a URL do site
+correta.
+
+1. No repositório, acesse **Settings → Pages**:
+   - **Build and deployment → Source** → **GitHub Actions**.
+   - **Custom domain** → `mobeuv.com` (e aponte o DNS: registros `A`/`CNAME`
+     para o GitHub Pages).
 2. Faça push para a branch `main`. O workflow
    [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) faz o build e
-   publica em `https://<owner>.github.io/<repo>/`.
+   o deploy automaticamente.
 
-O `basePath` e a URL do site são calculados automaticamente a partir do nome do
-repositório no workflow. Para publicar em um **domínio próprio**
-(ex.: `https://mobeuv.com`), configure o domínio no Pages e remova o
-`NEXT_PUBLIC_BASE_PATH` (deixe vazio) e ajuste `NEXT_PUBLIC_SITE_URL`.
+Para publicar em vez disso em `https://<owner>.github.io/<repo>/`, defina
+`NEXT_PUBLIC_BASE_PATH` como `/<repo>` no workflow (veja o comentário no
+próprio `deploy.yml`).
 
 ## Estrutura
 
